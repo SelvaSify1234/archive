@@ -1,0 +1,19 @@
+<nav class="navbar navbar-dark bg-dark mb-5">
+    <a class="navbar-brand" routerLink="/archival"><img src="assets/img/logo.png"></a>
+    <div class="navbar-expand">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" [routerLinkActive]="['active']" routerLink="/archival">Archival</a>
+        <a class="nav-item nav-link" [routerLinkActive]="['active']" routerLink="/reports" >Reports</a>
+        <a class="nav-item nav-link" [routerLinkActive]="['active']"  [routerLinkActiveOptions]="{exact:
+          true}" routerLink="/archival/faq">FAQ</a>
+      </div>
+    </div>
+    <div class="navbar-expand ml-auto navbar-nav">
+      <div class="navbar-nav">
+        
+        <a class="nav-item nav-link" href="#login">
+          <i class="fa fa-sign-in"></i>
+        </a>
+      </div>
+    </div>
+  </nav>

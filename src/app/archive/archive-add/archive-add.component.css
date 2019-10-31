@@ -1,0 +1,18 @@
+.sfy-fg
+{
+    background-color: #dee2e6;
+    padding: 9px;
+    border-radius: 10px;
+    border: 2px solid #dee2e6;
+    margin: 9px;
+}
+.upload-link{
+    text-decoration: none;
+}
+.archival-content{
+    background-color:#e6ffff;
+    padding: 9px;
+    border-radius: 10px;
+    border: 2px solid #e6dede;
+    margin: 9px;
+}

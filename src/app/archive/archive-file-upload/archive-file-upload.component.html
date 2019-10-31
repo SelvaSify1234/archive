@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+      <div class="col">
+          <div *ngIf="hasError" class="alert alert-danger alert-dismissible">
+              <strong>{{errorMessage}}</strong>
+            </div>
+         <div *ngIf="isDataProcessCompleted" class="alert alert-success">
+              <p class="lead text-center text-bold">{{successMessage}}</p>
+              <a class="btn btn-primary btn-sm" routerLink="/reports">Click here to view log details</a>
+         </div>
+          <div class="card">
+              <div class="card-header">
+                  <h4>Upload the configuration file</h4>
+              </div>
+              <div class="card-body">
+                  <div class="col-sm-12">
+                      <label class="btn btn-default">
+                          <input #uploadedFile type="file" (change)="selectFile($event)" accept=".yaml,.yml,application/yaml">
+                        </label>
+                        
+                        <button class="btn btn-md btn-success" [disabled]="!selectedFiles" (click)="upload()">Upload</button>
+                  </div>
+                  <div class="col-sm-12">
+                    <a download="simple_user_input.json" class="btn btn-sm btn-primary float-right" target="_blank" href="/assets/docs/simple_user_input.json">
+                        Click here to  download the sample file
+                      </a>
+                  </div>
+              </div>
+              <div class="card-footer">
+                  <a class="btn btn-info btn-sm float-right" routerLink="/archival/add"><strong>Click here go back to configuration form</strong></a>
+              </div>
+            </div> 
+      </div>      
+    </div>
+    <br>
+    <br>
+    <br>
+</div>

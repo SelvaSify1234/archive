@@ -1,0 +1,48 @@
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+      <h6 class="display-5">Welcome, Database Archival Application!</h6>
+      <p>Data archiving is the process of moving data that is no longer actively used to a separate storage device for long-term retention. Archive data consists of older data that is still important to the organization and may be needed for future reference, as well as data that must be retained for regulatory compliance</p>
+      <p><a class="btn btn-primary btn-md" routerLink="/archival/add" role="button">Start Archival</a></p>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="alert alert-info text-center">
+              <strong>Recently archived log file information</strong>
+            </div>
+            <div *ngIf="isLogAvailable;else NoRecentLogs">
+                <table class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th scope="col text-center">Date</th>
+                    <th scope="col text-center">Log File Name</th>
+                    <th scope="col text-center">File Size</th>
+                    <th scope="col text-center">Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let log of recentLogs">
+                        <td>{{log.date}}</td>
+                        <td>{{log.file_name}}</td>
+                        <td>{{log.file_size}}</td>
+                        <td><a href="{{baseUrl}}reports/download/{{log.file_name}}" class="btn btn-sm btn-outline-dark" role="button" aria-pressed="true">Download</a></td>
+                     </tr>
+                   </tbody>
+                </table>
+              
+              </div>
+              <ng-template #NoRecentLogs>
+                  <div class="alert alert-warning">
+                      <strong>No Recently archived log file information</strong>
+                    </div>
+              </ng-template>
+        </div>
+    </div>
+
+
+
+  </div> <!-- /container -->
