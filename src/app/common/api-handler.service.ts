@@ -45,8 +45,7 @@ export class ApiHandlerService {
 
   //Save data to the server {JSON Format} -- POST Method
   postData (url : string,postData : any): Observable<any> {
-/*Selva */
-    //console.log(postData);
+/*Commented By Selva */
    // return this.http.post<any>(this.baseUrl+url, postData,this.httpOptions).pipe(
     return this.http.post<any>(this.baseUrl+url, postData,{ headers: new HttpHeaders({ 'Content-Type': 'application/json' }) } ).pipe(
       catchError(this.handleError('postDataE',[]))

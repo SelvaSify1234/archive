@@ -16,7 +16,7 @@ export class ArchiveAddComponent implements OnInit {
 	archivalResult:any;
 	isDataProcessCompleted:boolean;
 	hasError:boolean;
-	customerType:any;
+	customer_type:any;
 	successMessage: string;
 	constructor(private fb: FormBuilder,private spinner: NgxSpinnerService,private http:ApiHandlerService) { 
 			this.serverConfigForm=fb.group({
@@ -33,7 +33,7 @@ export class ArchiveAddComponent implements OnInit {
 					'mysql_destination_database':[null,[Validators.required]],
 					'mysql_source_cust_Type':[null,[Validators.required]],
 					'mysql_select_module':[null,[Validators.required]],
-					'customerType':[null,[Validators.required]],
+					'customer_type':[null,[Validators.required]],
 					'create_dest_table_if_not_exists':[null]
 					}),
 				
@@ -54,14 +54,14 @@ export class ArchiveAddComponent implements OnInit {
 		  'database_config':{
 			  'mysql_source_host':'127.0.0.1',
 			  'mysql_source_username':'root',
-			  'mysql_source_password':'',
+			  'mysql_source_password':'support2019',
 			  'mysql_source_port':'3307',
-			  'mysql_source_database':'one',
+			  'mysql_source_database':'mydb',
 			  'mysql_destination_host':'127.0.0.1',
 			  'mysql_destination_username':'root',
-			  'mysql_destination_password':'',
+			  'mysql_destination_password':'support2019',
 			  'mysql_destination_port':'3307',
-			  'mysql_destination_database':'one',
+			  'mysql_destination_database':'world',
 			}
 	  });
 	    	}
@@ -92,7 +92,7 @@ export class ArchiveAddComponent implements OnInit {
 	}
 	
 	onSubmit(){
-		if(this.serverConfigForm.valid){
+	//	if(this.serverConfigForm.valid){
 			
 			this.isDataProcessCompleted=false;
 			this.errorMessage='';
@@ -131,7 +131,7 @@ export class ArchiveAddComponent implements OnInit {
 				}
 				});
 			}
-		}
+	//	}
 	}
 	clearFormData(){
 		this.serverConfigForm.reset();
@@ -178,9 +178,8 @@ export class ArchiveAddComponent implements OnInit {
 	}
 
 	setReplyTypeValue() {
-		//console.log();
-		// set 'predefined' or 'opentype' based on selected value of the form
-		this.customerType =this.serverConfigForm.controls.database_config.controls.customerType.value;
+		let databaseConfig=this.serverConfigForm.get('database_config').value;
+		this.customer_type=databaseConfig.customer_type;
 	}
 	
 }

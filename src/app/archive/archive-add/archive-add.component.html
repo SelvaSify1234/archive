@@ -20,79 +20,34 @@
 
 
 
-
-
-						<!-- <div class="col-sm-4">
-								<p>Customer Type:
-			
-								<input type="checkbox" value="Forumnxt" ng-model="check" >Forumnxt 
-								<input type="checkbox"   value="Others">Others 
-								</p>
-							
-							<h6>Customer Type:</h6>
-						<p>  
-							<select class="form-control form-control-sm"   >
-							  <option value=""></option>
-							  <option value="1">Forumnxt
-							  <option value="2">Others
-							</select></p> -->
-
-							<div class="clearfix">
-			<div class="col-sm-4" >
-		<h6>Customer Type:</h6>	
-	<select class="form-control select2" formControlName="customerType" type="select"  (change)="setReplyTypeValue()" >
+							<div class="row">
+									<div class="col-sm-3">
+											<div class="form-group">
+		<h4>Customer Type:</h4>	
+	<!-- <select class="form-control select2" formControlName="customer_type" type="select"  (change)="setReplyTypeValue()" >
 			<option value=""></option>
 		<option value="1">Forumnxt</option>
 	  <option value="2">Others</option>
-	</select> 
-	<span class="text-danger small" *ngIf="DC.controls['customerType'].invalid && (DC.controls['customerType'].dirty || DC.controls['customerType'].touched) && DC.controls['customerType'].errors.required">
+	</select>  -->
+
+	<label>
+			<input type="radio"  value="1" formControlName="customer_type"  (change)="setReplyTypeValue()">
+			  <span style="padding: 10px;"> <b> Forumnxt </b>  </span> 
+		  </label>
+		  <label>
+			<input type="radio" value="2" formControlName="customer_type"  (change)="setReplyTypeValue()">
+			  <span style="padding: 10px;" ><b>  Others </b> </span>
+		  </label>
+
+	<span class="text-danger small" *ngIf="DC.controls['customer_type'].invalid && (DC.controls['customer_type'].dirty || DC.controls['customer_type'].touched) && DC.controls['customer_type'].errors.required">
 			This field is required
 	  </span>
 	
 	 </div>	
-							</div>
-							<div class="clearfix">
-      <div class="col-sm-4"  *ngIf="customerType =='1'">
-     <label>Select Module</label>
-     <input type="text" class="form-control form-control-sm" placeholder="Select Module" formControlName="mysql_select_module"  />
-     <span class="text-danger small" *ngIf="DC.controls['mysql_select_module'].invalid && (DC.controls['mysql_select_module'].dirty || DC.controls['mysql_select_module'].touched) && DC.controls['mysql_select_module'].errors.required">
-     This field is required
-	 </span>
-	 <small id="checkiftablenotexists" class="text-muted float-right">
-										<label  class="form-check-label"> <input class="form-check-input " type="checkbox" formControlName="create_dest_table_if_not_exists" value="yes">  Create table if not exists</label>
-									</small>
-     </div>
-     <div>
-     	<p></p>
-	 </div>
-	 </div>
-	
-							
+</div>
+<div class="clearfix"></div>
+</div>
 	 <h4>Database Configuration</h4>
-
-<!-- <div>
-	 <select class="form-control select2" formControlName="replytype" type="text" style="width: 100%;" >
-			<option value="predefined">Predefined</option>
-			<option value="opentype">Open Type</option>
-		  </select> 
-		</div>
-
-		<div class="col-md-12 no-padding" *ngIf="replytype =='predefined'">
-				<label>Application Name</label>
-				<input type="text" formControlName="mysql_select_module" class="form-control" id="mysql_select_module" placeholder="Application Name">
-				<span class="text-danger small" *ngIf="DC.controls['mysql_select_module'].invalid && (DC.controls['mysql_select_module'].dirty || DC.controls['mysql_select_module'].touched) && DC.controls['mysql_select_module'].errors.required">
-						This field is required
-						</span>
-				 <span class="text-danger" *ngIf="form.controls['applicationname'].touched && form.controls['applicationname'].hasError('required')">
-					Application Name is required! </span> -->
-			  <!-- </div> 
-			  <div class="col-md-12 no-padding" *ngIf="replytype =='opentype'">
-					<label>Main Menu</label>
-					<input type="text"class="form-control" id="mainmenu" placeholder="Message Text">
-				  </div>  --> 
-
-
-
 					<h6>Source Database configuration</h6>
 					<div class="row">
 						 <div class="col-sm-3">
@@ -117,7 +72,7 @@
 						  <div class="col-sm-2">
 							<div class="form-group">
 								<label>Password</label>
-								<input type="text" class="form-control form-control-sm" placeholder="password" formControlName="mysql_source_password"/>
+								<input type="password" class="form-control form-control-sm" placeholder="password" formControlName="mysql_source_password"/>
 							</div>
 						  </div>
 						  <div class="col-sm-2">
@@ -162,7 +117,7 @@
 						 <div class="col-sm-2">
 						   <div class="form-group">
 							   <label>Password</label>
-							   <input type="text" class="form-control form-control-sm" placeholder="password" formControlName="mysql_destination_password"/>
+							   <input type="password" class="form-control form-control-sm" placeholder="password" formControlName="mysql_destination_password"/>
 						   </div>
 						 </div>
 						 <div class="col-sm-2">
@@ -184,9 +139,31 @@
 						   </div>
 					   </div>
 				   </div>
+				   
+				   <div class="clearfix">			
+						<div class="col-sm-4"  *ngIf="customer_type =='1'">
+						<div class="float-left">
+							</div>				
+				          <label>Select Module Name</label>
+					   <div class="form-group">
+					   <input type="text" class="form-control form-control-sm" placeholder="Select Module Name" formControlName="mysql_select_module"  />
+					   <span class="text-danger small" *ngIf="DC.controls['mysql_select_module'].invalid && (DC.controls['mysql_select_module'].dirty || DC.controls['mysql_select_module'].touched) && DC.controls['mysql_select_module'].errors.required">
+					   This field is required
+					   </span>
+					   <small id="chkiftablenotexists" class="text-muted float-right">
+					 <label  class="form-check-label"> <input class="form-check-input " type="checkbox" formControlName="create_dest_table_if_not_exists" value="yes">  Create table if not exists</label>
+													  </small>
+							</div>							
+						</div>
+					   </div>
 				</div>
+
 				
-				<div formArrayName="tableConfig" *ngIf="customerType =='2'" >
+				
+
+					   <div class="clearfix">	</div>
+
+				<div formArrayName="tableConfig" *ngIf="customer_type =='2'" >
 						<div class="clearfix">
 								<div class="float-left">
 									<h4>Table Configuration</h4>
@@ -280,9 +257,9 @@
 				<br>
 				<br>
 				<div class="row justify-content-md-right">
-						<div class="col">
+						<div class="col" >
 							<!-- <button type="submit" [disabled]="serverConfigForm.invalid" class="btn btn-block btn-success">Start Archive</button> -->
-							<button type="submit" [disabled]="serverConfigForm.invalid" class="btn btn-block btn-success">Start Archive</button>
+							<button type="submit"   class="btn btn-block btn-success">Start Archive</button>
 						</div>
 						<div class="col">
 							<button type="button" class="btn btn-block btn-danger" (click)="clearFormData()">Cancel</button>
