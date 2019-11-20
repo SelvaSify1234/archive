@@ -24,11 +24,7 @@
 									<div class="col-sm-3">
 											<div class="form-group">
 		<h4>Customer Type:</h4>	
-	<!-- <select class="form-control select2" formControlName="customer_type" type="select"  (change)="setReplyTypeValue()" >
-			<option value=""></option>
-		<option value="1">Forumnxt</option>
-	  <option value="2">Others</option>
-	</select>  -->
+	
 
 	<label>
 			<input type="radio"  value="1" formControlName="customer_type"  (change)="setReplyTypeValue()">
@@ -140,22 +136,23 @@
 					   </div>
 				   </div>
 				   
-				   <div class="clearfix">			
-						<div class="col-sm-4"  *ngIf="customer_type =='1'">
-						<div class="float-left">
-							</div>				
-				          <label>Select Module Name</label>
-					   <div class="form-group">
-					   <input type="text" class="form-control form-control-sm" placeholder="Select Module Name" formControlName="mysql_select_module"  />
-					   <span class="text-danger small" *ngIf="DC.controls['mysql_select_module'].invalid && (DC.controls['mysql_select_module'].dirty || DC.controls['mysql_select_module'].touched) && DC.controls['mysql_select_module'].errors.required">
-					   This field is required
-					   </span>
-					   <small id="chkiftablenotexists" class="text-muted float-right">
-					 <label  class="form-check-label"> <input class="form-check-input " type="checkbox" formControlName="create_dest_table_if_not_exists" value="yes">  Create table if not exists</label>
-													  </small>
-							</div>							
-						</div>
-					   </div>
+				   <div class="clearfix"></div>
+				   <div class="row">
+				   			<div class="col-sm-4"  *ngIf="customer_type =='1'">
+				   			<div class="float-left">
+				   				</div>				
+				   	          <label>Module Name</label>
+				   		   <div class="form-group">
+				   		   <input type="text" class="form-control form-control-sm" placeholder="Module Name" formControlName="mysql_select_module"  />
+				   		   <span class="text-danger small" *ngIf="DC.controls['mysql_select_module'].invalid && (DC.controls['mysql_select_module'].dirty || DC.controls['mysql_select_module'].touched) && DC.controls['mysql_select_module'].errors.required">
+				   		   This field is required
+				   		   </span>
+				   		   <small id="chkiftablenotexists" class="text-muted float-right">
+				   		 <label  class="form-check-label"> <input class="form-check-input " type="checkbox" formControlName="create_dest_table_if_not_exists" value="yes"> Create destination table if not exists</label>
+				   										  </small>
+				   				</div>							
+				   			</div>
+				   </div>
 				</div>
 
 				
@@ -258,8 +255,8 @@
 				<br>
 				<div class="row justify-content-md-right">
 						<div class="col" >
-							<!-- <button type="submit" [disabled]="serverConfigForm.invalid" class="btn btn-block btn-success">Start Archive</button> -->
-							<button type="submit"   class="btn btn-block btn-success">Start Archive</button>
+							<button type="submit" [disabled]="serverConfigForm.invalid" class="btn btn-block btn-success">Start Archive</button>
+							<!-- <button type="submit"   class="btn btn-block btn-success">Start Archive</button> -->
 						</div>
 						<div class="col">
 							<button type="button" class="btn btn-block btn-danger" (click)="clearFormData()">Cancel</button>

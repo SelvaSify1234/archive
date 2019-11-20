@@ -18,9 +18,10 @@ export class ArchiveAddComponent implements OnInit {
 	hasError:boolean;
 	customer_type:any;
 	successMessage: string;
+	group: any;
 	constructor(private fb: FormBuilder,private spinner: NgxSpinnerService,private http:ApiHandlerService) { 
-			this.serverConfigForm=fb.group({
-				'database_config': fb.group({
+			 this.group = {
+			      'database_config': fb.group({
 					'mysql_source_host':[null,[Validators.required]],
 					'mysql_source_username':[null,[Validators.required]],
 					'mysql_source_password':[null],
@@ -31,25 +32,34 @@ export class ArchiveAddComponent implements OnInit {
 					'mysql_destination_password':[null],
 					'mysql_destination_port':[null,[Validators.required]],
 					'mysql_destination_database':[null,[Validators.required]],
-					'mysql_source_cust_Type':[null,[Validators.required]],
 					'mysql_select_module':[null,[Validators.required]],
-					'customer_type':[null,[Validators.required]],
+					'customer_type':['1',[Validators.required]],
 					'create_dest_table_if_not_exists':[null]
 					}),
-				
-				'tableConfig':fb.array([
-					fb.group({
-						'source_table':[null,Validators.required],
-						'destination_table':[null,Validators.required],
-						'create_destination_table_if_not_exists':['yes'],
-						'related_tables':[null],
-						'condition':[null,Validators.required],
-					}),
-				]),
-			});
+			};
+			this.customer_type=1;
+			  	if(this.customer_type!==1){
+			  		this.group['tableConfig'] = this.fb.array([
+								this.fb.group({
+									'source_table':[null,Validators.required],
+									'destination_table':[null,Validators.required],
+									'create_destination_table_if_not_exists':['yes'],
+									'related_tables':[null],
+									'condition':[null,Validators.required],
+								}),
+							]);
+			  	}
+			  	else{
+			  		delete this.group['tableConfig'];
+			  	}
+			  this.serverConfigForm=this.fb.group(this.group);
+			  //console.log(this.serverConfigForm);
+			
 	}
 
   	ngOnInit() {
+  	
+  	
 	  this.serverConfigForm.patchValue({
 		  'database_config':{
 			  'mysql_source_host':'127.0.0.1',
@@ -64,7 +74,7 @@ export class ArchiveAddComponent implements OnInit {
 			  'mysql_destination_database':'world',
 			}
 	  });
-	    	}
+	}
   
 	get DC(): any {
 		return this.serverConfigForm.get('database_config');
@@ -90,9 +100,8 @@ export class ArchiveAddComponent implements OnInit {
 			alert("Cannot remove the last instance.");
 		}
 	}
-	
 	onSubmit(){
-	//	if(this.serverConfigForm.valid){
+		if(this.serverConfigForm.valid){
 			
 			this.isDataProcessCompleted=false;
 			this.errorMessage='';
@@ -101,22 +110,33 @@ export class ArchiveAddComponent implements OnInit {
 			this.spinner.show();
 			let databaseConfig=this.serverConfigForm.get('database_config').value;
 			let databaseConfigKey=databaseConfig.mysql_source_database;
-			let tableConfig=this.serverConfigForm.get('tableConfig').value;
 			let tableLevelConfig={};
-			let j=0;
-			tableConfig.forEach(element => {
-				tableLevelConfig[element.source_table]=element
-				j++;
-			});
-			if(tableConfig.length==j){
-				let dbConfig={
+			let dbConfig={
 					[databaseConfigKey]:databaseConfig
 			}
 			let inputData={
-				'database_config':dbConfig,
-				'table_config':{[databaseConfigKey]:tableLevelConfig}
+				'database_config':dbConfig
 			};
-
+			
+			if(Number(this.customer_type)!=1){
+				alert('hello');
+				let tableConfig=this.serverConfigForm.get('tableConfig').value;
+				let j=0;
+				tableConfig.forEach(element => {
+					tableLevelConfig[element.source_table]=element
+					j++;
+				});
+				if(tableConfig.length==j){
+					let dbConfig={
+						[databaseConfigKey]:databaseConfig
+					}
+					let inputData={
+						'database_config':dbConfig,
+						'table_config':{[databaseConfigKey]:tableLevelConfig}
+					};
+				}
+			}
+			
 			this.http.postData('db/archive-manual',inputData).subscribe(data=>{
 				this.spinner.hide();
 				if(data.status_code=='200'){
@@ -129,15 +149,15 @@ export class ArchiveAddComponent implements OnInit {
 					this.hasError=true;
 					this.errorMessage=data.message;
 				}
-				});
-			}
-	//	}
+			});
+			
+		}
 	}
 	clearFormData(){
 		this.serverConfigForm.reset();
 	}
 	saveConfig(){
-		debugger;
+		
 		if(this.serverConfigForm.valid){
 			this.isDataProcessCompleted=false;
 			this.errorMessage='';
@@ -180,6 +200,23 @@ export class ArchiveAddComponent implements OnInit {
 	setReplyTypeValue() {
 		let databaseConfig=this.serverConfigForm.get('database_config').value;
 		this.customer_type=databaseConfig.customer_type;
+		if(this.customer_type!==1){
+  		this.group['tableConfig'] = this.fb.array([
+					this.fb.group({
+						'source_table':[null,Validators.required],
+						'destination_table':[null,Validators.required],
+						'create_destination_table_if_not_exists':['yes'],
+						'related_tables':[null],
+						'condition':[null,Validators.required],
+					}),
+				]);
+  			
+  		}
+  		else{
+  			delete this.group['tableConfig'];
+  		}
+  		this.serverConfigForm=this.fb.group(this.group);
+  		//console.log(this.serverConfigForm);
 	}
 	
 }
