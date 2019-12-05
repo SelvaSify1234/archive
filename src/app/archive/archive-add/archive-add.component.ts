@@ -72,6 +72,10 @@ export class ArchiveAddComponent implements OnInit {
 			  'mysql_destination_password':'support2019',
 			  'mysql_destination_port':'3307',
 			  'mysql_destination_database':'world',
+			  'mysql_select_module':'collection',
+			  'customer_type':'1',
+			  'create_dest_table_if_not_exists':true
+
 			}
 	  });
 	}
@@ -101,7 +105,8 @@ export class ArchiveAddComponent implements OnInit {
 		}
 	}
 	onSubmit(){
-		if(this.serverConfigForm.valid){
+		console.log(this.serverConfigForm);
+		//if(this.serverConfigForm.valid){
 			
 			this.isDataProcessCompleted=false;
 			this.errorMessage='';
@@ -119,9 +124,9 @@ export class ArchiveAddComponent implements OnInit {
 			};
 			
 			if(Number(this.customer_type)!=1){
-				alert('hello');
 				let tableConfig=this.serverConfigForm.get('tableConfig').value;
 				let j=0;
+				
 				tableConfig.forEach(element => {
 					tableLevelConfig[element.source_table]=element
 					j++;
@@ -151,7 +156,7 @@ export class ArchiveAddComponent implements OnInit {
 				}
 			});
 			
-		}
+		//}
 	}
 	clearFormData(){
 		this.serverConfigForm.reset();
@@ -216,7 +221,7 @@ export class ArchiveAddComponent implements OnInit {
   			delete this.group['tableConfig'];
   		}
   		this.serverConfigForm=this.fb.group(this.group);
-  		//console.log(this.serverConfigForm);
+  		console.log(this.serverConfigForm);
 	}
 	
 }
