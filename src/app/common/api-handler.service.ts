@@ -7,7 +7,6 @@ import { catchError } from 'rxjs/operators';
 })
 export class ApiHandlerService {
   //private baseUrl : string = 'http://223.30.223.76:8080/';
- // private baseUrl : string = 'http://localhost:8080/';
   //private baseUrl : string = 'http://localhost:3000/';
   private baseUrl : string = 'http://13.235.174.119:3000/';
   constructor(private http: HttpClient) { }
