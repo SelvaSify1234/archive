@@ -53,31 +53,29 @@ export class ArchiveAddComponent implements OnInit {
 			  		delete this.group['tableConfig'];
 			  	}
 			  this.serverConfigForm=this.fb.group(this.group);
-			  //console.log(this.serverConfigForm);
-			
 	}
 
   	ngOnInit() {
   	
   	
-	  this.serverConfigForm.patchValue({
-		  'database_config':{
-			  'mysql_source_host':'127.0.0.1',
-			  'mysql_source_username':'root',
-			  'mysql_source_password':'support2019',
-			  'mysql_source_port':'3307',
-			  'mysql_source_database':'mydb',
-			  'mysql_destination_host':'127.0.0.1',
-			  'mysql_destination_username':'root',
-			  'mysql_destination_password':'support2019',
-			  'mysql_destination_port':'3307',
-			  'mysql_destination_database':'world',
-			  'mysql_select_module':'collection',
-			  'customer_type':'1',
-			  'create_dest_table_if_not_exists':true
+	//   this.serverConfigForm.patchValue({
+	// 	  'database_config':{
+	// 		  'mysql_source_host':'127.0.0.1',
+	// 		  'mysql_source_username':'root',
+	// 		  'mysql_source_password':'support2019',
+	// 		  'mysql_source_port':'3307',
+	// 		  'mysql_source_database':'mydb',
+	// 		  'mysql_destination_host':'127.0.0.1',
+	// 		  'mysql_destination_username':'root',
+	// 		  'mysql_destination_password':'support2019',
+	// 		  'mysql_destination_port':'3307',
+	// 		  'mysql_destination_database':'world',
+	// 		  'mysql_select_module':'collection',
+	// 		  'customer_type':'1',
+	// 		  'create_dest_table_if_not_exists':true
 
-			}
-	  });
+	// 		}
+	//   });
 	}
   
 	get DC(): any {
@@ -105,9 +103,7 @@ export class ArchiveAddComponent implements OnInit {
 		}
 	}
 	onSubmit(){
-		console.log(this.serverConfigForm);
-		//if(this.serverConfigForm.valid){
-			
+		if(this.serverConfigForm.valid){
 			this.isDataProcessCompleted=false;
 			this.errorMessage='';
 			this.hasError=false;
@@ -119,9 +115,11 @@ export class ArchiveAddComponent implements OnInit {
 			let dbConfig={
 					[databaseConfigKey]:databaseConfig
 			}
-			let inputData={
+			let inputData;
+			 inputData={
 				'database_config':dbConfig
 			};
+			
 			
 			if(Number(this.customer_type)!=1){
 				let tableConfig=this.serverConfigForm.get('tableConfig').value;
@@ -135,7 +133,7 @@ export class ArchiveAddComponent implements OnInit {
 					let dbConfig={
 						[databaseConfigKey]:databaseConfig
 					}
-					let inputData={
+					inputData={
 						'database_config':dbConfig,
 						'table_config':{[databaseConfigKey]:tableLevelConfig}
 					};
@@ -155,14 +153,15 @@ export class ArchiveAddComponent implements OnInit {
 					this.errorMessage=data.message;
 				}
 			});
-			
-		//}
+		}
 	}
 	clearFormData(){
+		this.isDataProcessCompleted=false;
+			this.errorMessage='';
+			this.hasError=false;
 		this.serverConfigForm.reset();
 	}
 	saveConfig(){
-		
 		if(this.serverConfigForm.valid){
 			this.isDataProcessCompleted=false;
 			this.errorMessage='';
@@ -174,6 +173,7 @@ export class ArchiveAddComponent implements OnInit {
 			let tableConfig=this.serverConfigForm.get('tableConfig').value;
 			let tableLevelConfig={};
 			let j=0;
+			
 			tableConfig.forEach(element => {
 				tableLevelConfig[element.source_table]=element
 				j++;
