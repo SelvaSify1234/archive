@@ -173,7 +173,7 @@
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label>Source table</label>
-									<input type="text" class="form-control form-control-sm"  placeholder="vtiger_table_name" formControlName="source_table" />
+									<input type="text" class="form-control form-control-sm"  placeholder="vtiger_table_name" formControlName="source_table" oninput="this.value = this.value.toLowerCase()" />
 								   <span class="text-danger small" *ngIf="group.controls['source_table'].invalid && (group.controls['source_table'].dirty || group.controls['source_table'].touched) && group.controls['source_table'].errors.required">
 										This field is required
 								  </span>

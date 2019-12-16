@@ -56,8 +56,6 @@ export class ArchiveAddComponent implements OnInit {
 	}
 
   	ngOnInit() {
-  	
-  	
 	//   this.serverConfigForm.patchValue({
 	// 	  'database_config':{
 	// 		  'mysql_source_host':'127.0.0.1',
@@ -156,10 +154,11 @@ export class ArchiveAddComponent implements OnInit {
 		}
 	}
 	clearFormData(){
-		this.isDataProcessCompleted=false;
-			this.errorMessage='';
-			this.hasError=false;
-		this.serverConfigForm.reset();
+		// this.isDataProcessCompleted=false;
+		// 	this.errorMessage='';
+		// 	this.hasError=false;
+		// this.serverConfigForm.reset();
+		window.location.reload();
 	}
 	saveConfig(){
 		if(this.serverConfigForm.valid){
