@@ -56,24 +56,24 @@ export class ArchiveAddComponent implements OnInit {
 	}
 
   	ngOnInit() {
-	  //this.serverConfigForm.patchValue({
-		  //'database_config':{
-			//   'mysql_source_host':'127.0.0.1',
-			//   'mysql_source_username':'root',
-			//   'mysql_source_password':'support2019',
-			//   'mysql_source_port':'3307',
-			//   'mysql_source_database':'mydb',
-			//   'mysql_destination_host':'127.0.0.1',
-			//   'mysql_destination_username':'root',
-			//   'mysql_destination_password':'support2019',
-			//   'mysql_destination_port':'3307',
-			//   'mysql_destination_database':'world',
-			 // 'mysql_select_module':'collection',
-			//   'customer_type':'1',
-			//   'create_dest_table_if_not_exists':true
+	  this.serverConfigForm.patchValue({
+		  'database_config':{
+			  'mysql_source_host':'127.0.0.1',
+			  'mysql_source_username':'root',
+			  'mysql_source_password':'support2019',
+			  'mysql_source_port':'3307',
+			  'mysql_source_database':'mydb',
+			  'mysql_destination_host':'127.0.0.1',
+			  'mysql_destination_username':'root',
+			  'mysql_destination_password':'support2019',
+			  'mysql_destination_port':'3307',
+			  'mysql_destination_database':'world',
+			 'mysql_select_module':'collection',
+			  'customer_type':'1',
+			  'create_dest_table_if_not_exists':true
 
-			//}
-	//  });
+			}
+	 });
 	}
   
 	get DC(): any {
